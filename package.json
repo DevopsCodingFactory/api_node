@@ -1,35 +1,35 @@
 {
-  "name": "devops_api_node",
-  "version": "1.0.0",
-  "main": "src/server.ts",
-  "repository": "git@github.com:DevopsCodingFactory/api_node.git",
-  "author": "IlhanYapici <ilhan-yapici@outlook.fr>",
-  "license": "MIT",
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "start": "node build/index.js | pino-pretty --colorize",
-    "dev": "ts-node-dev ./src/server.ts | pino-pretty --colorize",
-    "format": "npx @biomejs/biome format src --write",
-    "lint": "npx @biomejs/biome lint src",
-    "lint:fix": "npx @biomejs/biome lint src --apply"
-  },
-  "dependencies": {
-    "@fastify/mysql": "4.2.0",
-    "dotenv": "16.4.5",
-    "env-schema": "5.2.1",
-    "fastify": "4.26.2",
-    "fastify-cors": "6.1.0",
-    "fluent-json-schema": "4.2.1",
-    "pino": "8.19.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.6.1",
-    "@tsconfig/node18": "18.2.2",
-    "@types/node": "20.11.27",
-    "@types/pino": "7.0.5",
-    "pino-pretty": "10.3.1",
-    "ts-node": "10.9.2",
-    "ts-node-dev": "2.0.0",
-    "typescript": "5.4.2"
-  }
+	"name": "devops_api_node",
+	"version": "1.0.0",
+	"main": "src/server.ts",
+	"repository": "git@github.com:DevopsCodingFactory/api_node.git",
+	"author": "IlhanYapici <ilhan-yapici@outlook.fr>",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc -p tsconfig.json",
+		"start": "node build/index.js | pino-pretty --colorize",
+		"dev": "tsnd ./src/server.ts | pino-pretty --colorize",
+		"format": "npx @biomejs/biome format src --write",
+		"lint": "npx @biomejs/biome lint src",
+		"lint:fix": "npx @biomejs/biome lint src --apply"
+	},
+	"dependencies": {
+		"@prisma/client": "5.11.0",
+		"dotenv": "16.4.5",
+		"env-schema": "4.0.0",
+		"fastify": "4.26.2",
+		"fastify-cors": "6.1.0",
+		"fluent-json-schema": "3.1.0",
+		"pino": "8.19.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.6.1",
+		"@tsconfig/node18": "18.2.2",
+		"@types/node": "20.11.27",
+		"@types/pino": "7.0.5",
+		"pino-pretty": "10.3.1",
+		"ts-node": "10.9.2",
+		"ts-node-dev": "2.0.0",
+		"typescript": "5.4.2"
+	}
 }
