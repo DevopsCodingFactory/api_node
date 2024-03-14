@@ -1,0 +1,62 @@
+- name: Installing MariaDB and dependencies
+  package:
+    name: "{{ item }}"
+    update_cache: yes
+  loop:
+    - mariadb-server
+    - mariadb-client
+    - python3-mysqldb
+    - libmariadb-dev
+  become: yes
+
+- name: start and enable mariadb service
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Enable remote login to mariadb
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    backup: yes
+
+- name: Remove anonymous users
+  mysql_query:
+    query: DELETE FROM mysql.user WHERE User='';
+
+- name: Disallow root login remotely
+  mysql_query:
+    query: DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+
+- name: Remove test database
+  mysql_query:
+    query: DROP DATABASE IF EXISTS test;
+
+- name: Remove access to test database
+  mysql_query:
+    query: DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+
+- name: creating mariadb user
+  mysql_user:
+    name: "dbapipokemon"
+    password: "N@meK@PIpaBd"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+
+- name: Reload privilege tables
+  mysql_query:
+    query: FLUSH PRIVILEGES;
+
+- name: creating dbpokemon
+  mysql_db:
+    name: "dbpokemon"
+    state: present
+
+- name: Restart MariaDB service
+  service:
+    name: mariadb
+    state: restarted
+  become: yes
