@@ -1,4 +1,5 @@
 import fastify from 'fastify'
+import cors from '@fastify/cors'
 import pino from 'pino'
 import { loadConfig } from './config'
 import { healthCheckRoute, pokemonRoute } from './routes'
@@ -16,6 +17,9 @@ const startServer = async () => {
 			server.log.error(error)
 		})
 
+		server.register(cors, {
+			origin: false
+		})
 		server.register(healthCheckRoute, { prefix: '/health-check' })
 		server.register(pokemonRoute, { prefix: '/pokemon' })
 
@@ -33,7 +37,7 @@ const startServer = async () => {
 				)
 			}
 		}
-		await server.listen({ port })
+		await server.listen({ port, host: "0.0.0.0" })
 	} catch (e) {
 		console.error(e)
 	}

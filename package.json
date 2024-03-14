@@ -15,11 +15,11 @@
 		"lint:fix": "npx @biomejs/biome lint src --apply"
 	},
 	"dependencies": {
+		"@fastify/cors": "9.0.1",
 		"@prisma/client": "5.11.0",
 		"dotenv": "16.4.5",
 		"env-schema": "4.0.0",
 		"fastify": "4.26.2",
-		"fastify-cors": "6.1.0",
 		"fluent-json-schema": "3.1.0",
 		"pino": "8.19.0"
 	},
