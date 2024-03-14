@@ -6,8 +6,8 @@ export function healthCheck(): Promise<void> {
 			.then(() => {
 				resolve()
 			})
-			.catch((e) => {
-				reject(e)
+			.catch(() => {
+				reject(new Error('Health check failed'))
 			})
 	})
 }
