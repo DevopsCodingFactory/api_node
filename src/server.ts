@@ -37,6 +37,10 @@ const startServer = async () => {
 				)
 			}
 		}
+
+		const logger  = pino()
+		logger.info(`You are running in ${process.env.NODE_ENV} mode.`)
+
 		await server.listen({ port, host: "0.0.0.0" })
 	} catch (e) {
 		console.error(e)
