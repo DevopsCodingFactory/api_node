@@ -7,10 +7,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
-		"docker:build:dev": "docker build -t api-node_dev -f Dockerfile.dev .",
-		"docker:build:prod": "docker build -t api-node_prod -f Dockerfile.prod .",
-		"docker:run:dev": "docker run -p 5173:5173 api-node_dev",
-		"docker:run:prod": "docker run -p 5174:5173 api-node_prod",
+		"docker:build": "docker build -t api_node -f Dockerfile .",
+		"docker:run": "docker run -p 8000:8000 api_node",
 		"start": "NODE_ENV=production node dist/server.js | pino-pretty --colorize",
 		"dev": "tsnd ./src/server.ts | pino-pretty --colorize",
 		"prisma:generate": "npx prisma generate",

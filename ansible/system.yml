@@ -27,5 +27,25 @@
         create: yes
         validate: 'visudo -cf %s'
 
-    - name: Execute MariaDB installation playbook
-      include_tasks: install_db.yml
+    - name: Install Docker
+      ansible.builtin.package:
+        name: docker.io
+        state: present
+
+    - name: Ensure Docker service is running
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    - name: Pull Docker image
+      ansible.builtin.docker_image:
+        name: ghcr.io/devopscodingfactory/api_node/api_node:latest
+        source: pull
+
+    - name: Run Docker container
+      ansible.builtin.docker_container:
+        name: api_node
+        image: ghcr.io/devopscodingfactory/api_python/api_node:latest
+        state: started
+        published_ports:
+          - "8000:8000"
