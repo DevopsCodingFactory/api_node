@@ -47,5 +47,4 @@ jobs:
         with:
           context: .
           push: true
-          target: main
           tags: ghcr.io/devopscodingfactory/api_node/apipokemon_node:latest
