@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  backend_node:
+    container_name: devops_backend_node
+    command: yarn dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:1234
+
