@@ -4,7 +4,7 @@ import { prisma } from '../prisma'
 export async function pokemonRoute(server: FastifyInstance) {
 	server.get('/', async (request, reply) => {
 		try {
-			const pokemons = await prisma.dbpokemon.findMany()
+			const pokemons = await prisma.apipokemon_pokemon.findMany()
 			reply.status(200).send(pokemons)
 		} catch (e) {
 			reply.status(500).send(e)
@@ -15,7 +15,7 @@ export async function pokemonRoute(server: FastifyInstance) {
 		'/:id',
 		async (request, reply) => {
 			try {
-				const pokemon = await prisma.dbpokemon.findUnique({
+				const pokemon = await prisma.apipokemon_pokemon.findUnique({
 					where: {
 						id: Number(request.params.id),
 					},

@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model dbpokemon {
+model apipokemon_pokemon {
   id         Int    @id @default(autoincrement())
   nom        String
   generation String
