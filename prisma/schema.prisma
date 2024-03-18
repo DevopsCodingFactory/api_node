@@ -15,7 +15,7 @@ datasource db {
 
 model apipokemon_pokemon {
   id         Int    @id @default(autoincrement())
-  nom        String
+  name       String
   generation String
   type       String
 }
