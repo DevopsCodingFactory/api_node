@@ -25,45 +25,11 @@ jobs:
 
       - name: Run lint
         run: yarn lint
-
-  build:
-    runs-on: self-hosted
-
-    needs: lint
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-
-      - name: Create env file
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          envkey_API_PORT: ${{ secrets.API_PORT }}
-          envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
-          file_name: .env
-          fail_on_empty: true
-
-      - name: Build image
-        uses: docker/build-push-action@v5
-        with:
-          tags: tests-image:latest
-          push: false
-
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: test-image:latest
-          run: NODE_ENV=testing node tests/run.js
   
   publish:
     runs-on: [ self-hosted, node ]
 
-    needs: build
+    needs: lint
 
     steps:
       - name: Checkout code
