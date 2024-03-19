@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, node]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -24,7 +24,7 @@ jobs:
         run: yarn install --frozen-lockfile
   
   publish:
-    runs-on: self-hosted
+    runs-on: [self-hosted, node]
 
     needs: build
 
