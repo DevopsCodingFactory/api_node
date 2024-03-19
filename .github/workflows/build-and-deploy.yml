@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build, Publish and Deploy
 
 concurrency: production
 
@@ -23,12 +23,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
   
-  deploy:
+  publish:
     runs-on: self-hosted
 
     needs: build
 
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -56,4 +61,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/devopscodingfactory/api_node/apipokemon_node:latest
+          tags: ghcr.io/devopscodingfactory/api_node/apipokemon_node:${{ steps.extract_branch.outputs.branch }}
